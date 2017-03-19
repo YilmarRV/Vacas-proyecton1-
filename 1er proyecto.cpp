@@ -14,7 +14,6 @@ using namespace std;
 
 using namespace std;
 int n=0,ncuantos,resultado;
-
 class Vacas {
 public:
 
@@ -64,7 +63,9 @@ float getlitros(){
     
     }
 };
-int main(int argc, char** argv) {
+
+
+int main(int argc, char *argv[]){
 	int nVacas,opc;
 	Vacas LVacas[Limite]; 
 	Vacas auxiliar;
@@ -91,10 +92,10 @@ int main(int argc, char** argv) {
    		LVacas[x].setlitros(pro);
    		system("cls");
 	}
-	
+
 	do{
-    	system("PAUSE");
-		system("CLS");
+           system("PAUSE");
+		   system("CLS");
 		cout<<"\tBienvenido al menu\n\n ";
 	    cout<<"\tEliga una opcion:"<<endl;
         cout<<"\t1. Ordenar por nombre"<<endl;
@@ -104,7 +105,7 @@ int main(int argc, char** argv) {
 	    cout<<"\t5. Salir"<<endl<<endl;
         cout<<"\tOpcion: ";
 		cin>>opc;
-	//	system("cls");
+
 		
 		switch(opc){
 			case 1:
@@ -158,5 +159,61 @@ int main(int argc, char** argv) {
 					cout<<LVacas[x].getnombre()<<"\t"<<LVacas[x].getraza()<<"\t"<<LVacas[x].getpeso()<<"\t"<<LVacas[x].getlitros()<<"\n";
     			}
     		break;
-	return 0;
+    		case 3:
+    					for (int i = 0; i < nVacas; i++) {
+	       	 	    for (int j = 0; j <= nVacas-2; j++) {
+	                	string aux1=LVacas[j].getraza();
+	                    string aux2=LVacas[j+1].getraza();
+	                    char comparar1[15];
+						char comparar2[15];
+						int tamano1=aux1.size();
+				   		int tamano2=aux2.size();
+				   		for(int x=0;x<=tamano1;x++){
+                    	  	comparar1[x]=aux1[x];
+                    	}
+						for(int x=0;x<=tamano2;x++){
+	                       	comparar2[x]=aux2[x];
+                       	} 	                     	 	    	
+	                    if (strncmp(comparar1, comparar2,15)>0){
+	                 		auxiliar = LVacas[j];
+		             	   	LVacas[j] =LVacas[j+1];
+		               		LVacas[j+1] = auxiliar;
+			            }
+	                } 
+            	}
+					
+				cout<<"Lista ordenada por raza:\n\n"<<endl;
+    			cout<<"Nombre\tRaza\tPeso\tLitros\t\n";
+    				for (int x=0;x<nVacas;x++){
+						cout<<LVacas[x].getnombre()<<"\t"<<LVacas[x].getraza()<<"\t"<<LVacas[x].getpeso()<<"\t"<<LVacas[x].getlitros()<<"\n";
+					}
+						
+				break;
+    				
+    			case 4:
+    				for(int i = 0; i < nVacas; i++) {
+						for (int j = 0; j <= nVacas-2; j++) {
+							if (LVacas[j].getlitros()> LVacas[j+1].getlitros()) {
+									 
+								auxiliar = LVacas[j];
+								LVacas[j]=LVacas[j+1];
+								LVacas[j+1]= auxiliar;
+							}
+						}
+					}
+    					
+    				cout<<"Lista ordenada por Litros de leche:\n\n"<<endl;
+    				cout<<"Nombre\tRaza\tPeso\tLitros\t\n";
+    				for (int x=0;x<nVacas;x++){
+					
+						cout<<LVacas[x].getnombre()<<"\t"<<LVacas[x].getraza()<<"\t"<<LVacas[x].getpeso()<<"\t"<<LVacas[x].getlitros()<<"\n";
+					}
+            	break;
+            		
+        }
+	}while(opc!=5);
+
+system("PAUSE");
+return 0;
 }
+
